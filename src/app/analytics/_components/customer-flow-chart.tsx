@@ -27,7 +27,7 @@ export function CustomerFlowChart() {
         <div className="space-y-8">
             <div>
                 <h2 className="mb-4 text-xl font-semibold text-dark dark:text-white">
-                    Customer Flow and Dwell Time Patterns
+                    AI-Powered Customer Experience Analytics
                 </h2>
 
                 <div className="h-80 w-full">
@@ -65,8 +65,8 @@ export function CustomerFlowChart() {
 
                 <div className="mt-4 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/20">
                     <p className="text-sm text-blue-800 dark:text-blue-200">
-                        <strong>Insight:</strong> Peak customer flow occurs between 1-2 PM and 5-6 PM.
-                        Consider staffing adjustments during these periods.
+                        <strong>AI Insight:</strong> Computer vision analysis shows peak customer flow between 1-2 PM and 5-6 PM.
+                        AI recommends increasing staff during these periods for optimal service quality.
                     </p>
                 </div>
             </div>

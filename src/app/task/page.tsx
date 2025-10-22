@@ -189,9 +189,6 @@ export default function TaskPage() {
                     <h1 className="text-2xl font-bold text-dark dark:text-white">
                         Tasks
                     </h1>
-                    <p className="text-dark-5 dark:text-dark-6">
-                        Manage action items from AI-detected events
-                    </p>
                 </div>
                 <button
                     onClick={() => setIsAddingTask(true)}

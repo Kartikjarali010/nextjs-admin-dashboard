@@ -7,7 +7,7 @@ interface Report {
     title: string;
     description: string;
     type: "summary" | "detailed" | "custom";
-    icon: string;
+    icon: React.ReactElement;
     sections: string[];
     estimatedTime: string;
 }
@@ -44,7 +44,7 @@ export function ReportGenerator({ report, onClose, onGenerate, isGenerating }: R
             <div className="mx-4 w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl dark:bg-gray-dark">
                 <div className="mb-6 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="text-3xl">{report.icon}</div>
+                        <div className="text-gray-600 dark:text-gray-400">{report.icon}</div>
                         <div>
                             <h2 className="text-xl font-semibold text-dark dark:text-white">
                                 Generate {report.title}
@@ -72,8 +72,8 @@ export function ReportGenerator({ report, onClose, onGenerate, isGenerating }: R
                                     key={format.value}
                                     onClick={() => setSelectedFormat(format.value as "pdf" | "excel" | "csv")}
                                     className={`rounded-lg border-2 p-4 text-left transition-all ${selectedFormat === format.value
-                                            ? "border-primary bg-primary/5 dark:bg-primary/10"
-                                            : "border-gray-200 hover:border-gray-300 dark:border-dark-3 dark:hover:border-dark-2"
+                                        ? "border-primary bg-primary/5 dark:bg-primary/10"
+                                        : "border-gray-200 hover:border-gray-300 dark:border-dark-3 dark:hover:border-dark-2"
                                         }`}
                                 >
                                     <div className="mb-2 text-2xl">{format.icon}</div>

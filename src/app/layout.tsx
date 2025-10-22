@@ -14,11 +14,11 @@ import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | HumanStudio - Next.js Dashboard Kit",
-    default: "HumanStudio - Next.js Dashboard Kit",
+    template: "%s | HumanStudio - AI Video Analytics Platform",
+    default: "HumanStudio - AI Video Analytics Platform",
   },
   description:
-    "Next.js admin dashboard toolkit with 200+ templates, UI components, and integrations for fast dashboard development.",
+    "Plug-and-play computer vision system that gives brains to existing cameras. AI intelligence for customer experience, operational efficiency, and service quality analytics.",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

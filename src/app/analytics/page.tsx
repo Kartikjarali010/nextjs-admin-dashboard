@@ -41,11 +41,8 @@ export default function AnalyticsPage() {
             {/* Header */}
             <div className="mb-8">
                 <h1 className="mb-2 text-3xl font-bold text-dark dark:text-white">
-                    Analytics Hub
+                    Analytics
                 </h1>
-                <p className="text-lg text-dark-5 dark:text-dark-6">
-                    {activeTabData?.description}
-                </p>
             </div>
 
             {/* Navigation Tabs */}
@@ -56,8 +53,8 @@ export default function AnalyticsPage() {
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
                             className={`px-6 py-3 text-sm font-medium transition-all duration-200 ${activeTab === tab.id
-                                    ? "border-b-2 border-primary bg-white dark:bg-gray-dark text-primary dark:text-white"
-                                    : "text-dark-5 dark:text-dark-6 hover:text-dark dark:hover:text-white hover:bg-gray-50 dark:hover:bg-dark-2"
+                                ? "border-b-2 border-primary bg-white dark:bg-gray-dark text-primary dark:text-white"
+                                : "text-dark-5 dark:text-dark-6 hover:text-dark dark:hover:text-white hover:bg-gray-50 dark:hover:bg-dark-2"
                                 }`}
                         >
                             {tab.label}

@@ -72,9 +72,9 @@ export default function CameraPage() {
     const getStatusText = (status: string) => {
         switch (status) {
             case "online":
-                return "Online";
+                return "AI Analyzing";
             case "recording":
-                return "Recording";
+                return "Recording + AI";
             case "offline":
                 return "Offline";
             default:
@@ -88,11 +88,8 @@ export default function CameraPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-dark dark:text-white">
-                        Camera Feeds
+                        AI Video Analytics
                     </h1>
-                    <p className="text-dark-5 dark:text-dark-6">
-                        Live monitoring of all connected cameras
-                    </p>
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">

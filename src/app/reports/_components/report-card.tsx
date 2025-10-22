@@ -7,7 +7,7 @@ interface Report {
     title: string;
     description: string;
     type: "summary" | "detailed" | "custom";
-    icon: string;
+    icon: React.ReactElement;
     sections: string[];
     estimatedTime: string;
 }
@@ -43,12 +43,12 @@ export function ReportCard({ report, isSelected, onSelect, onGenerate, isGenerat
 
     return (
         <div className={`rounded-lg border-2 p-6 transition-all duration-200 ${isSelected
-                ? "border-primary bg-primary/5 dark:bg-primary/10"
-                : "border-gray-200 bg-white hover:border-gray-300 dark:border-dark-3 dark:bg-gray-dark dark:hover:border-dark-2"
+            ? "border-primary bg-primary/5 dark:bg-primary/10"
+            : "border-gray-200 bg-white hover:border-gray-300 dark:border-dark-3 dark:bg-gray-dark dark:hover:border-dark-2"
             }`}>
             <div className="mb-4 flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                    <div className="text-3xl">{report.icon}</div>
+                    <div className="text-gray-600 dark:text-gray-400">{report.icon}</div>
                     <div>
                         <h3 className="text-lg font-semibold text-dark dark:text-white">
                             {report.title}
@@ -62,8 +62,8 @@ export function ReportCard({ report, isSelected, onSelect, onGenerate, isGenerat
                 <button
                     onClick={onSelect}
                     className={`rounded-full p-2 transition-colors ${isSelected
-                            ? "bg-primary text-white"
-                            : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-3"
+                        ? "bg-primary text-white"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-dark-2 dark:text-dark-6 dark:hover:bg-dark-3"
                         }`}
                 >
                     {isSelected ? "✓" : "+"}
