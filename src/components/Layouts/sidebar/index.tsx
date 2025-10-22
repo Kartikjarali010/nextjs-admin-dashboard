@@ -17,11 +17,6 @@ export function Sidebar() {
     isOpen,
     isMobile,
     toggleSidebar,
-    isCollapsed,
-    isHovered,
-    setIsHovered,
-    handleMouseEnter,
-    handleMouseLeave
   } = useSidebarContext();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -74,34 +69,26 @@ export function Sidebar() {
           isMobile ? "fixed bottom-0 left-0 top-0 z-50" : "sticky top-0 h-screen",
           isMobile
             ? (isOpen ? "w-full max-w-[290px]" : "w-0")
-            : (isCollapsed && !isHovered ? "w-16" : "w-full max-w-[290px]"),
+            : "w-full max-w-[290px]",
         )}
         aria-label="Main navigation"
         aria-hidden={!isOpen}
         inert={!isOpen}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       >
         <div className={cn(
           "flex h-full flex-col py-10 transition-all duration-300 ease-in-out",
-          isMobile ? "pl-[25px] pr-[7px]" : (isCollapsed && !isHovered ? "px-2" : "pl-[25px] pr-[7px]")
+          isMobile ? "pl-[25px] pr-[7px]" : "pl-[25px] pr-[7px]"
         )}>
           <div className={cn(
             "relative transition-all duration-300 ease-in-out",
-            isMobile ? "pr-4.5" : (isCollapsed && !isHovered ? "pr-0" : "pr-4.5")
+            isMobile ? "pr-4.5" : "pr-4.5"
           )}>
             <Link
               href={"/"}
               onClick={() => isMobile && toggleSidebar()}
-              className="px-0 py-2.5 min-[850px]:py-0 flex items-center justify-center"
+              className="px-2 py-3 min-[850px]:py-2 flex items-center justify-center"
             >
-              {isCollapsed && !isHovered && !isMobile ? (
-                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">N</span>
-                </div>
-              ) : (
-                <Logo />
-              )}
+              <Logo />
             </Link>
 
             {isMobile && (
@@ -119,15 +106,13 @@ export function Sidebar() {
           {/* Navigation */}
           <div className={cn(
             "custom-scrollbar mt-6 flex-1 overflow-y-auto transition-all duration-300 ease-in-out min-[850px]:mt-10",
-            isMobile ? "pr-3" : (isCollapsed && !isHovered ? "pr-0" : "pr-3")
+            isMobile ? "pr-3" : "pr-3"
           )}>
             {NAV_DATA.map((section) => (
               <div key={section.label} className="mb-6">
-                {(!isCollapsed || isHovered || isMobile) && (
-                  <h2 className="mb-5 text-sm font-medium text-dark-4 dark:text-dark-6">
-                    {section.label}
-                  </h2>
-                )}
+                <h2 className="mb-5 text-sm font-medium text-dark-4 dark:text-dark-6">
+                  {section.label}
+                </h2>
 
                 <nav role="navigation" aria-label={section.label}>
                   <ul className="space-y-2">
@@ -140,31 +125,26 @@ export function Sidebar() {
                                 (subItem: any) => subItem.url === pathname,
                               )}
                               onClick={() => toggleExpanded(item.title)}
-                              className={cn(
-                                isCollapsed && !isHovered && !isMobile && "justify-center px-2"
-                              )}
                             >
                               <item.icon
                                 className="size-6 shrink-0"
                                 aria-hidden="true"
                               />
 
-                              {(!isCollapsed || isHovered || isMobile) && (
-                                <>
-                                  <span>{item.title}</span>
-                                  <ChevronUp
-                                    className={cn(
-                                      "ml-auto rotate-180 transition-transform duration-200",
-                                      expandedItems.includes(item.title) &&
-                                      "rotate-0",
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                </>
-                              )}
+                              <>
+                                <span>{item.title}</span>
+                                <ChevronUp
+                                  className={cn(
+                                    "ml-auto rotate-180 transition-transform duration-200",
+                                    expandedItems.includes(item.title) &&
+                                    "rotate-0",
+                                  )}
+                                  aria-hidden="true"
+                                />
+                              </>
                             </MenuItem>
 
-                            {expandedItems.includes(item.title) && (!isCollapsed || isHovered || isMobile) && (
+                            {expandedItems.includes(item.title) && (
                               <ul
                                 className="ml-9 mr-0 space-y-1.5 pb-[15px] pr-0 pt-2"
                                 role="menu"
@@ -193,10 +173,7 @@ export function Sidebar() {
 
                             return (
                               <MenuItem
-                                className={cn(
-                                  "flex items-center gap-3 py-3",
-                                  isCollapsed && !isHovered && !isMobile && "justify-center px-2"
-                                )}
+                                className="flex items-center gap-3 py-3"
                                 as="link"
                                 href={href}
                                 isActive={pathname === href}
@@ -206,9 +183,7 @@ export function Sidebar() {
                                   aria-hidden="true"
                                 />
 
-                                {(!isCollapsed || isHovered || isMobile) && (
-                                  <span>{item.title}</span>
-                                )}
+                                <span>{item.title}</span>
                               </MenuItem>
                             );
                           })()

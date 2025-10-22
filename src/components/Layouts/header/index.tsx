@@ -24,13 +24,37 @@ export function Header() {
 
       {isMobile && (
         <Link href={"/"} className="ml-2 max-[430px]:hidden min-[375px]:ml-4">
-          <Image
-            src={"/images/logo/logo-icon.svg"}
-            width={32}
-            height={32}
-            alt=""
-            role="presentation"
-          />
+          <div className="flex items-center gap-2">
+            {/* User Icon */}
+            <div className="flex-shrink-0">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-black dark:text-white"
+              >
+                {/* User head */}
+                <circle cx="12" cy="8" r="4" fill="currentColor" />
+                {/* User body */}
+                <path
+                  d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+
+            {/* Human Studio Text */}
+            <div className="flex flex-col">
+              <span className="text-base font-bold text-black dark:text-white leading-tight">
+                Human
+              </span>
+              <span className="text-base font-bold text-black dark:text-white leading-tight">
+                Studio
+              </span>
+            </div>
+          </div>
         </Link>
       )}
 
