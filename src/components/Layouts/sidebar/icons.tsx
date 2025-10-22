@@ -186,3 +186,104 @@ export function ArrowLeftIcon(props: PropsType) {
     </svg>
   );
 }
+
+export function CameraIcon(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M9.5 2.25a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM6.25 4.5A2.75 2.75 0 003.5 7.25v8.5A2.75 2.75 0 006.25 18.5h11.5A2.75 2.75 0 0020.5 15.75v-8.5A2.75 2.75 0 0017.75 4.5H6.25zM2 7.25A4.25 4.25 0 016.25 3h11.5A4.25 4.25 0 0122 7.25v8.5A4.25 4.25 0 0117.75 20H6.25A4.25 4.25 0 012 15.75v-8.5z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 8.25a3.75 3.75 0 100 7.5 3.75 3.75 0 000-7.5zM8.25 12a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function TaskIcon(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M5.25 2.25a3 3 0 00-3 3v13.5a3 3 0 003 3h13.5a3 3 0 003-3V5.25a3 3 0 00-3-3H5.25zM3.75 5.25a1.5 1.5 0 011.5-1.5h13.5a1.5 1.5 0 011.5 1.5v13.5a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V5.25z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16.5 8.25a.75.75 0 01.75.75v6a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zM8.25 9a.75.75 0 00-1.5 0v6a.75.75 0 001.5 0V9z"
+        fill="currentColor"
+      />
+      <path d="M9.75 12a.75.75 0 011.5 0v3a.75.75 0 01-1.5 0v-3zM14.25 12a.75.75 0 011.5 0v3a.75.75 0 01-1.5 0v-3z" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function AnalyticsIcon(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 3a1 1 0 000 2v14a1 1 0 001 1h16a1 1 0 100-2H4V5a1 1 0 00-1-1z"
+        fill="currentColor"
+      />
+      <path
+        d="M7 12a1 1 0 011-1h2a1 1 0 110 2H8a1 1 0 01-1-1zM7 16a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zM15 8a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zM15 12a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zM15 16a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function ReportsIcon(props: PropsType) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 3a1 1 0 000 2v14a1 1 0 001 1h16a1 1 0 100-2H4V5a1 1 0 00-1-1z"
+        fill="currentColor"
+      />
+      <path
+        d="M6 8a1 1 0 011-1h10a1 1 0 110 2H7a1 1 0 01-1-1zM6 12a1 1 0 011-1h8a1 1 0 110 2H7a1 1 0 01-1-1zM6 16a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

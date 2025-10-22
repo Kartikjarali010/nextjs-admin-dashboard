@@ -4,7 +4,7 @@ import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { NAV_DATA } from "./data";
 import { ArrowLeftIcon, ChevronUp } from "./icons";
 import { MenuItem } from "./menu-item";
@@ -12,35 +12,49 @@ import { useSidebarContext } from "./sidebar-context";
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { setIsOpen, isOpen, isMobile, toggleSidebar } = useSidebarContext();
+  const {
+    setIsOpen,
+    isOpen,
+    isMobile,
+    toggleSidebar,
+    isCollapsed,
+    isHovered,
+    setIsHovered,
+    handleMouseEnter,
+    handleMouseLeave
+  } = useSidebarContext();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  const toggleExpanded = (title: string) => {
+  const toggleExpanded = useCallback((title: string) => {
     setExpandedItems((prev) => (prev.includes(title) ? [] : [title]));
 
     // Uncomment the following line to enable multiple expanded items
     // setExpandedItems((prev) =>
     //   prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
     // );
-  };
+  }, []);
 
   useEffect(() => {
     // Keep collapsible open, when it's subpage is active
     NAV_DATA.some((section) => {
       return section.items.some((item) => {
-        return item.items.some((subItem) => {
-          if (subItem.url === pathname) {
-            if (!expandedItems.includes(item.title)) {
-              toggleExpanded(item.title);
+        // Check if item has sub-items and if any sub-item matches current pathname
+        if (item.items && item.items.length > 0) {
+          return item.items.some((subItem: any) => {
+            if (subItem.url === pathname) {
+              if (!expandedItems.includes(item.title)) {
+                toggleExpanded(item.title);
+              }
+              // Break the loop
+              return true;
             }
-
-            // Break the loop
-            return true;
-          }
-        });
+            return false;
+          });
+        }
+        return false;
       });
     });
-  }, [pathname]);
+  }, [pathname, expandedItems, toggleExpanded]);
 
   return (
     <>
@@ -55,22 +69,38 @@ export function Sidebar() {
 
       <aside
         className={cn(
-          "max-w-[290px] overflow-hidden border-r border-gray-200 bg-white transition-[width] duration-200 ease-linear dark:border-gray-800 dark:bg-gray-dark",
-          isMobile ? "fixed bottom-0 top-0 z-50" : "sticky top-0 h-screen",
-          isOpen ? "w-full" : "w-0",
+          "overflow-hidden border-r border-gray-200 bg-white transition-all duration-300 ease-in-out dark:border-gray-800 dark:bg-gray-dark",
+          isMobile ? "fixed bottom-0 left-0 top-0 z-50" : "sticky top-0 h-screen",
+          isMobile
+            ? (isOpen ? "w-full max-w-[290px]" : "w-0")
+            : (isCollapsed && !isHovered ? "w-16" : "w-full max-w-[290px]"),
         )}
         aria-label="Main navigation"
         aria-hidden={!isOpen}
         inert={!isOpen}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        <div className="flex h-full flex-col py-10 pl-[25px] pr-[7px]">
-          <div className="relative pr-4.5">
+        <div className={cn(
+          "flex h-full flex-col py-10 transition-all duration-300 ease-in-out",
+          isMobile ? "pl-[25px] pr-[7px]" : (isCollapsed && !isHovered ? "px-2" : "pl-[25px] pr-[7px]")
+        )}>
+          <div className={cn(
+            "relative transition-all duration-300 ease-in-out",
+            isMobile ? "pr-4.5" : (isCollapsed && !isHovered ? "pr-0" : "pr-4.5")
+          )}>
             <Link
               href={"/"}
               onClick={() => isMobile && toggleSidebar()}
-              className="px-0 py-2.5 min-[850px]:py-0"
+              className="px-0 py-2.5 min-[850px]:py-0 flex items-center justify-center"
             >
-              <Logo />
+              {isCollapsed && !isHovered && !isMobile ? (
+                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">N</span>
+                </div>
+              ) : (
+                <Logo />
+              )}
             </Link>
 
             {isMobile && (
@@ -86,48 +116,59 @@ export function Sidebar() {
           </div>
 
           {/* Navigation */}
-          <div className="custom-scrollbar mt-6 flex-1 overflow-y-auto pr-3 min-[850px]:mt-10">
+          <div className={cn(
+            "custom-scrollbar mt-6 flex-1 overflow-y-auto transition-all duration-300 ease-in-out min-[850px]:mt-10",
+            isMobile ? "pr-3" : (isCollapsed && !isHovered ? "pr-0" : "pr-3")
+          )}>
             {NAV_DATA.map((section) => (
               <div key={section.label} className="mb-6">
-                <h2 className="mb-5 text-sm font-medium text-dark-4 dark:text-dark-6">
-                  {section.label}
-                </h2>
+                {(!isCollapsed || isHovered || isMobile) && (
+                  <h2 className="mb-5 text-sm font-medium text-dark-4 dark:text-dark-6">
+                    {section.label}
+                  </h2>
+                )}
 
                 <nav role="navigation" aria-label={section.label}>
                   <ul className="space-y-2">
-                    {section.items.map((item) => (
+                    {section.items.map((item: any) => (
                       <li key={item.title}>
                         {item.items.length ? (
                           <div>
                             <MenuItem
                               isActive={item.items.some(
-                                ({ url }) => url === pathname,
+                                (subItem: any) => subItem.url === pathname,
                               )}
                               onClick={() => toggleExpanded(item.title)}
+                              className={cn(
+                                isCollapsed && !isHovered && !isMobile && "justify-center px-2"
+                              )}
                             >
                               <item.icon
                                 className="size-6 shrink-0"
                                 aria-hidden="true"
                               />
 
-                              <span>{item.title}</span>
-
-                              <ChevronUp
-                                className={cn(
-                                  "ml-auto rotate-180 transition-transform duration-200",
-                                  expandedItems.includes(item.title) &&
-                                    "rotate-0",
-                                )}
-                                aria-hidden="true"
-                              />
+                              {(!isCollapsed || isHovered || isMobile) && (
+                                <>
+                                  <span>{item.title}</span>
+                                  <ChevronUp
+                                    className={cn(
+                                      "ml-auto rotate-180 transition-transform duration-200",
+                                      expandedItems.includes(item.title) &&
+                                      "rotate-0",
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                </>
+                              )}
                             </MenuItem>
 
-                            {expandedItems.includes(item.title) && (
+                            {expandedItems.includes(item.title) && (!isCollapsed || isHovered || isMobile) && (
                               <ul
                                 className="ml-9 mr-0 space-y-1.5 pb-[15px] pr-0 pt-2"
                                 role="menu"
                               >
-                                {item.items.map((subItem) => (
+                                {item.items.map((subItem: any) => (
                                   <li key={subItem.title} role="none">
                                     <MenuItem
                                       as="link"
@@ -147,11 +188,14 @@ export function Sidebar() {
                               "url" in item
                                 ? item.url + ""
                                 : "/" +
-                                  item.title.toLowerCase().split(" ").join("-");
+                                item.title.toLowerCase().split(" ").join("-");
 
                             return (
                               <MenuItem
-                                className="flex items-center gap-3 py-3"
+                                className={cn(
+                                  "flex items-center gap-3 py-3",
+                                  isCollapsed && !isHovered && !isMobile && "justify-center px-2"
+                                )}
                                 as="link"
                                 href={href}
                                 isActive={pathname === href}
@@ -161,7 +205,9 @@ export function Sidebar() {
                                   aria-hidden="true"
                                 />
 
-                                <span>{item.title}</span>
+                                {(!isCollapsed || isHovered || isMobile) && (
+                                  <span>{item.title}</span>
+                                )}
                               </MenuItem>
                             );
                           })()

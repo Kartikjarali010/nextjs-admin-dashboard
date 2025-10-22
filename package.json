@@ -1,5 +1,5 @@
 {
-  "name": "free-nextadmin-nextjs",
+  "name": "free-humanstudio-nextjs",
   "version": "1.2.1",
   "private": true,
   "scripts": {
@@ -21,6 +21,7 @@
     "react": "19.0.0",
     "react-apexcharts": "^1.7.0",
     "react-dom": "19.0.0",
+    "recharts": "^3.3.0",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
