@@ -17,10 +17,9 @@ const customerExperienceData = [
 
 interface CustomerExperienceOverviewProps {
     className?: string;
-    timeFrame?: string;
 }
 
-export function CustomerExperienceOverview({ className, timeFrame }: CustomerExperienceOverviewProps) {
+export function CustomerExperienceOverview({ className }: CustomerExperienceOverviewProps) {
     return (
         <div className={`rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card ${className}`}>
             <div className="mb-6">

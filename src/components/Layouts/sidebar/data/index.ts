@@ -11,28 +11,26 @@ export const NAV_DATA = [
         items: [],
       },
       {
-        title: "Calendar",
-        url: "/calendar",
-        icon: Icons.Calendar,
-        items: [],
-      },
-      {
         title: "Camera",
         url: "/camera",
         icon: Icons.CameraIcon,
-        items: [],
-      },
-      {
-        title: "Task",
-        url: "/task",
-        icon: Icons.TaskIcon,
-        items: [],
-      },
-      {
-        title: "Analytics",
-        url: "/analytics",
-        icon: Icons.AnalyticsIcon,
-        items: [],
+        items: [
+          {
+            title: "StoreOps",
+            url: "/storeops",
+            icon: Icons.CameraIcon,
+          },
+          {
+            title: "RevenueOps",
+            url: "/revenueops",
+            icon: Icons.CameraIcon,
+          },
+          {
+            title: "ExperienceOps",
+            url: "/experienceops",
+            icon: Icons.CameraIcon,
+          },
+        ],
       },
       {
         title: "Reports",

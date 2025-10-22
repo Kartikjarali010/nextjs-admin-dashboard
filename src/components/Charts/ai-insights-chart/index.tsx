@@ -19,10 +19,9 @@ const insightTypes = [
 
 interface AIInsightsChartProps {
     className?: string;
-    timeFrame?: string;
 }
 
-export function AIInsightsChart({ className, timeFrame }: AIInsightsChartProps) {
+export function AIInsightsChart({ className }: AIInsightsChartProps) {
     return (
         <div className={`rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card ${className}`}>
             <div className="mb-6">

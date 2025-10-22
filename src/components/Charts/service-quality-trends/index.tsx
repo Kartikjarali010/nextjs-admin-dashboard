@@ -14,10 +14,9 @@ const serviceQualityData = [
 
 interface ServiceQualityTrendsProps {
     className?: string;
-    timeFrame?: string;
 }
 
-export function ServiceQualityTrends({ className, timeFrame }: ServiceQualityTrendsProps) {
+export function ServiceQualityTrends({ className }: ServiceQualityTrendsProps) {
     return (
         <div className={`rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card ${className}`}>
             <div className="mb-6">
