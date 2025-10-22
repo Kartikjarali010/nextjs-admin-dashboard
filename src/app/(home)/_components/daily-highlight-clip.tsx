@@ -20,7 +20,7 @@ export function DailyHighlightClip({ className }: DailyHighlightClipProps) {
                     Daily Highlight Clip
                 </h2>
                 <p className="text-sm text-gray-5 dark:text-dark-6 mt-1">
-                    Auto-generated highlights from today's interactions
+                    Auto-generated highlights from today&apos;s interactions
                 </p>
             </div>
 
@@ -93,7 +93,7 @@ export function DailyHighlightClip({ className }: DailyHighlightClipProps) {
                 <div className="mt-4 flex items-center justify-between">
                     <div>
                         <h3 className="text-sm font-medium text-dark dark:text-white">
-                            Today's Store Activity
+                            Today&apos;s Store Activity
                         </h3>
                         <p className="text-xs text-gray-5 dark:text-dark-6">
                             Peak hours: 10:00 AM - 2:00 PM
