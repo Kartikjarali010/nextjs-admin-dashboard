@@ -39,7 +39,7 @@ export function Sidebar() {
     NAV_DATA.some((section) => {
       return section.items.some((item) => {
         // Check if item has sub-items and if any sub-item matches current pathname
-        if (item.items && item.items.length > 0) {
+        if (item.items && Array.isArray(item.items) && item.items.length > 0) {
           return item.items.some((subItem: any) => {
             if (subItem.url === pathname) {
               if (!expandedItems.includes(item.title)) {
@@ -51,7 +51,8 @@ export function Sidebar() {
             return false;
           });
         }
-        return false;
+        // Check if the main item matches current pathname
+        return item.url === pathname;
       });
     });
   }, [pathname, expandedItems, toggleExpanded]);
@@ -95,7 +96,7 @@ export function Sidebar() {
               className="px-0 py-2.5 min-[850px]:py-0 flex items-center justify-center"
             >
               {isCollapsed && !isHovered && !isMobile ? (
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">N</span>
                 </div>
               ) : (
@@ -132,7 +133,7 @@ export function Sidebar() {
                   <ul className="space-y-2">
                     {section.items.map((item: any) => (
                       <li key={item.title}>
-                        {item.items.length ? (
+                        {item.items && Array.isArray(item.items) && item.items.length > 0 ? (
                           <div>
                             <MenuItem
                               isActive={item.items.some(

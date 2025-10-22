@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const alertsData = [
     {
@@ -79,8 +80,13 @@ const getAlertIcon = (type: string) => {
     }
 };
 
-export function LiveAlertsCard() {
+interface LiveAlertsCardProps {
+    className?: string;
+}
+
+export function LiveAlertsCard({ className }: LiveAlertsCardProps) {
     const [dismissedAlerts, setDismissedAlerts] = useState<number[]>([]);
+    const router = useRouter();
 
     const handleDismiss = (alertId: number) => {
         setDismissedAlerts(prev => [...prev, alertId]);
@@ -91,7 +97,7 @@ export function LiveAlertsCard() {
     );
 
     return (
-        <div className="col-span-12 xl:col-span-4 rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card">
+        <div className={`col-span-12 xl:col-span-4 rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card ${className}`}>
             <div className="mb-6">
                 <h2 className="text-lg font-semibold text-dark dark:text-white">
                     Live Alerts
@@ -116,8 +122,31 @@ export function LiveAlertsCard() {
                             className="rounded-lg border border-gray-200 p-4 dark:border-dark-3"
                         >
                             <div className="flex items-start gap-3">
-                                <div className="text-2xl">{getAlertIcon(alert.type)}</div>
-                                <div className="flex-1">
+                                {/* Clickable Camera Thumbnail */}
+                                <div
+                                    className="flex-shrink-0 cursor-pointer group"
+                                    onClick={() => router.push('/camera')}
+                                >
+                                    <div className="w-20 h-14 rounded-lg bg-gray-2 dark:bg-dark-2 overflow-hidden border-2 border-gray-3 dark:border-dark-3 group-hover:border-orange-500 transition-colors">
+                                        <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
+                                            <div className="text-center text-gray-5 dark:text-dark-6">
+                                                <svg className="w-5 h-5 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                                </svg>
+                                                <span className="text-xs font-medium">CAM-00{alert.id}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="text-xs text-center text-gray-5 dark:text-dark-6 mt-1 group-hover:text-orange-500 transition-colors">
+                                        Click to view
+                                    </div>
+                                </div>
+
+                                {/* Alert Icon */}
+                                <div className="text-2xl flex-shrink-0">{getAlertIcon(alert.type)}</div>
+
+                                {/* Content */}
+                                <div className="flex-1 min-w-0">
                                     <p className="font-medium text-dark dark:text-white mb-1">
                                         {alert.message}
                                     </p>
@@ -126,6 +155,8 @@ export function LiveAlertsCard() {
                                         <span>🕒 {alert.timestamp}</span>
                                     </div>
                                 </div>
+
+                                {/* Actions */}
                                 <div className="flex items-center gap-2">
                                     <span className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${getAlertColor(alert.type)}`}>
                                         {alert.type}

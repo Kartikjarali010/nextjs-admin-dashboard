@@ -35,13 +35,17 @@ const getStatusText = (status: string) => {
     }
 };
 
-export function CameraStatusGrid() {
+interface CameraStatusGridProps {
+    className?: string;
+}
+
+export function CameraStatusGrid({ className }: CameraStatusGridProps) {
     const onlineCameras = cameraStatusData.filter(cam => cam.status === "online").length;
     const recordingCameras = cameraStatusData.filter(cam => cam.status === "recording").length;
     const aiActiveCameras = cameraStatusData.filter(cam => cam.aiActive).length;
 
     return (
-        <div className="col-span-12 xl:col-span-7">
+        <div className={`col-span-12 xl:col-span-7 ${className}`}>
             <div className="rounded-lg bg-white p-6 shadow-1 dark:bg-gray-dark dark:shadow-card">
                 <div className="mb-6">
                     <h2 className="text-lg font-semibold text-dark dark:text-white">
